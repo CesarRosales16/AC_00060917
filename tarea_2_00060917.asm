@@ -37,7 +37,7 @@ msgloop:mov bl, [msg+di]
 	mov cx, 2d
 
 main:	MUL cx
-	CMP ax, 0XFF
+	CMP ax, 255d
 	JBE lower
 	JA higher
 
