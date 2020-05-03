@@ -22,7 +22,7 @@ len equ $-msg
 
 section	.text
 	mov di, 0d
-	mov cx, [len]
+	mov cx, len
 
 msgloop:mov bl, [msg+di]
 	mov [di+200h], bl
@@ -55,16 +55,27 @@ higher: mov [210h+bx], ax
 
 	mov ax, 0d
 	mov [220h], ax
-	mov ax, 1d
-	mov [221h], ax
-	mov bx, 1d
+	mov cx, 1d
+	mov [221h], cx
 
-fibo:	INC bx
-	mov ax, [220h+bx-1]
-	mov cx, [220h+bx-2]
-	add ax, cx
-	mov [220h+bx],ax
-	cmp bx, 14d
+	mov bx, 2d	
+
+
+fibo:	MOV dx, cx
+	ADD cx, ax
+	MOV ax, dx
+	CMP cx, 255d		; CX <=255?lowerF:higherF
+	JBE lowerf
+	JA higherf
+
+lowerf:	mov [220h+bx],cx
+	INC bx
+	cmp bx, 16d		;bx<16?fibo:NADA
 	jb fibo
+
+higherf:mov [220h+bx],cx
+	ADD bx, 2d
+	cmp bx, 16d
+	jb fibo			;bx<16?fibo:NADA
 
 	int 20h
