@@ -6,6 +6,7 @@ section .text
 	call 	texto	
 	call 	cursor
 	call 	phrase1
+	call 	phrase2
 	call	kbwait
 
 	int 	20h
@@ -63,15 +64,25 @@ loop1:	mov 	cl, [msg1+di-10d]
 	call 	m_row
 	ret
 
+phrase2:mov 	di, 33d
+loop2:	mov 	cl, [msg2+di-33d]
+	call    m_cursr
+	call 	w_char
+	inc	di
+	cmp 	di, len2
+	jb	loop2
+	call 	m_row
+	ret
+
 
 section .data
 msg1	db 	"Real Hasta la muerte Baby (Welcome To the Remix) ... Solaaa "
 len1 	equ	$-msg1+10d
 msg2	db 	"En este infierno (Oh-oh)"
-len2 	equ	$-msg1+33d
+len2 	equ	$-msg2+33d
 msg3	db 	"Vi un ángel pasar (Pasar)"
-len3 	equ	$-msg1+33d
+len3 	equ	$-msg3+33d
 msg4	db 	"Que iluminaba mi camino en medio de la oscuridad"
-len4 	equ	$-msg1+15d
+len4 	equ	$-msg4+15d
 msg5	db 	"Y le dije: Hola, te vi caminando en lo oscuro sola..."
-len5 	equ	$-msg1+12d
+len5 	equ	$-msg5+12d
