@@ -7,14 +7,14 @@ section .text
 	call 	cursor
 	call 	phrase1
 	call 	phrase2
+	call 	phrase2
 	call	kbwait
 
 	int 	20h
 
 init:	mov 	al, 0d
 	mov 	[200h], al
-	mov 	al, 5d
-	mov 	[201h], al
+	mov 	[210h], al
 	mov 	al, 0d	
 	ret
 
@@ -49,9 +49,11 @@ m_cursr:mov 	ah, 02h
 	int 	10h
 	ret
 
-m_row:	mov	ax, [200h]
-        add     ax,[201h]
+m_row:	mov 	[210h],	ax
+	mov	ax, [200h]
+        add     ax,5d
         mov	[200h],ax
+	mov	ax, [210h]
         ret
 
 phrase1:mov 	di, 10d
@@ -74,15 +76,28 @@ loop2:	mov 	cl, [msg2+di-33d]
 	call 	m_row
 	ret
 
+phrase3:mov 	di, 33d
+loop3:	mov 	cl, [msg3+di-33d]
+	call    m_cursr
+	call 	w_char
+	inc	di
+	cmp 	di, len3
+	jb	loop3
+	call 	m_row
+	ret
 
 section .data
-msg1	db 	"Real Hasta la muerte Baby (Welcome To the Remix) ... Solaaa "
+msg1	db 	"Real Hasta la muerte  "
 len1 	equ	$-msg1+10d
+
 msg2	db 	"En este infierno (Oh-oh)"
 len2 	equ	$-msg2+33d
-msg3	db 	"Vi un ángel pasar (Pasar)"
+
+msg3	db 	"Vi un angel pasar (Pasar)"
 len3 	equ	$-msg3+33d
+
 msg4	db 	"Que iluminaba mi camino en medio de la oscuridad"
 len4 	equ	$-msg4+15d
+
 msg5	db 	"Y le dije: Hola, te vi caminando en lo oscuro sola..."
 len5 	equ	$-msg5+12d
