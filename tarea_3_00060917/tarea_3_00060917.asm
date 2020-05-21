@@ -12,8 +12,9 @@ section .text
 
 	int 	20h
 
-init:	mov 	al, 0d
+init:	mov 	al, 6d
 	mov 	[200h], al
+	mov 	al, 0d
 	mov 	[210h], al
 	ret
 
@@ -55,8 +56,8 @@ m_row:	mov 	[210h],	ax
 	mov	ax, [210h]
         ret
 
-phrase1:mov 	di, 10d
-loop1:	mov 	cl, [msg1+di-10d]
+phrase1:mov 	di, 15d
+loop1:	mov 	cl, [msg1+di-15d]
 	call    m_cursr
 	call 	w_char
 	inc	di
@@ -65,8 +66,8 @@ loop1:	mov 	cl, [msg1+di-10d]
 	call 	m_row
 	ret
 
-phrase2:mov 	di, 33d
-loop2:	mov 	cl, [msg2+di-33d]
+phrase2:mov 	di, 30d
+loop2:	mov 	cl, [msg2+di-30d]
 	call    m_cursr
 	call 	w_char
 	inc	di
@@ -75,8 +76,8 @@ loop2:	mov 	cl, [msg2+di-33d]
 	call 	m_row
 	ret
 
-phrase3:mov 	di, 33d
-loop3:	mov 	cl, [msg3+di-33d]
+phrase3:mov 	di, 10d
+loop3:	mov 	cl, [msg3+di-10d]
 	call    m_cursr
 	call 	w_char
 	inc	di
@@ -86,11 +87,9 @@ loop3:	mov 	cl, [msg3+di-33d]
 	ret
 
 section .data
-msg1	db 	"Y le dije: Hola"
-len1 	equ	$-msg1+10d
-
+msg1	db 	"Y le dije: Hola, "
+len1 	equ	$-msg1+15d
 msg2	db 	"te vi caminando en lo oscuro sola"
-len2 	equ	$-msg2+33d
-
+len2 	equ	$-msg2+30d
 msg3	db 	"En este juego tu tienes la bola "
-len3 	equ	$-msg3+33d
+len3 	equ	$-msg3+10d
