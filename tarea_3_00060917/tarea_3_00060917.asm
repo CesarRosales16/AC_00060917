@@ -7,7 +7,7 @@ section .text
 	call 	cursor
 	call 	phrase1
 	call 	phrase2
-	call 	phrase2
+	call 	phrase3
 	call	kbwait
 
 	int 	20h
@@ -15,7 +15,6 @@ section .text
 init:	mov 	al, 0d
 	mov 	[200h], al
 	mov 	[210h], al
-	mov 	al, 0d	
 	ret
 
 texto:	mov 	ah, 00h
@@ -87,17 +86,11 @@ loop3:	mov 	cl, [msg3+di-33d]
 	ret
 
 section .data
-msg1	db 	"Real Hasta la muerte  "
+msg1	db 	"Y le dije: Hola"
 len1 	equ	$-msg1+10d
 
-msg2	db 	"En este infierno (Oh-oh)"
+msg2	db 	"te vi caminando en lo oscuro sola"
 len2 	equ	$-msg2+33d
 
-msg3	db 	"Vi un angel pasar (Pasar)"
+msg3	db 	"En este juego tu tienes la bola "
 len3 	equ	$-msg3+33d
-
-msg4	db 	"Que iluminaba mi camino en medio de la oscuridad"
-len4 	equ	$-msg4+15d
-
-msg5	db 	"Y le dije: Hola, te vi caminando en lo oscuro sola..."
-len5 	equ	$-msg5+12d
